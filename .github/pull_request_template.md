@@ -1,5 +1,5 @@
 name: Pull Request
-about: Contribute improvements to Julia110Exercises
+about: Contribute improvements to Julia100Exercises
 title: ''
 labels: []
 assignees: []
