@@ -1,0 +1,22 @@
+name = "Julia110Exercises"
+uuid = "a8b8d8f4-2c54-4f4b-9c3e-1a2b3c4d5e6f"
+authors = ["Arnav Kapoor <arnav@example.com>"]
+version = "1.1.0"
+description = "110 Julia exercises modernized for Julia 1.10+"
+
+[deps]
+# Core dependencies - required
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+
+# Optional dependencies - install as needed
+# Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+# UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
+# Tullio = "bc48ee85-29a4-5162-ae0b-a64e1601d4bc"
+# StaticKernels = "4c63dfa8-a427-4548-bd2f-4c19e87a7dc7"
+
+[compat]
+julia = "1.10"
