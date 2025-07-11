@@ -1,0 +1,88 @@
+name: Feature Request
+description: Suggest a new exercise or improvement
+title: "[FEATURE] "
+labels: ["enhancement", "question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature or improvement! We appreciate your ideas for making Julia110Exercises better.
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What type of feature are you requesting?
+      options:
+        - New exercise/question
+        - Improvement to existing exercise
+        - Documentation improvement
+        - New utility/tool
+        - Performance improvement
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: related-question
+    attributes:
+      label: Related Question (if applicable)
+      description: If this relates to an existing question, which one?
+      placeholder: e.g., Question 042
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of what you'd like to see
+      placeholder: Describe your feature request...
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why would this feature be useful? What problem does it solve?
+      placeholder: Explain why this would be helpful...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: If you have ideas for how to implement this, please share
+      placeholder: Describe your proposed solution...
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative approaches?
+      placeholder: Describe any alternatives you've considered...
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Estimated Difficulty Level
+      description: How difficult do you think this feature would be to implement?
+      options:
+        - "Easy"
+        - "Medium" 
+        - "Hard"
+        - "Advanced"
+        - "Not sure"
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to ensure this is not a duplicate
+          required: true
+        - label: This feature aligns with the goals of Julia110Exercises (educational Julia programming)
+          required: true
+        - label: I would be willing to help implement this feature if guidance is provided
+          required: false

@@ -1,0 +1,15 @@
+# Configuration for new issues
+blank_issues_enabled: false
+
+contact_links:
+  - name: Julia Documentation
+    url: https://docs.julialang.org/
+    about: Official Julia language documentation
+    
+  - name: Julia Discourse
+    url: https://discourse.julialang.org/
+    about: Community forum for Julia programming discussions
+    
+  - name: Julia Learning Resources
+    url: https://julialang.org/learning/
+    about: Official Julia learning resources and tutorials
