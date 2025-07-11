@@ -1,0 +1,98 @@
+name: Question / Help
+description: Ask for help with an exercise or Julia programming
+title: "[QUESTION] "
+labels: ["question", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need help with an exercise or Julia programming concept? We're here to help! 
+        
+        Please provide as much detail as possible so we can assist you effectively.
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Type of Question
+      description: What kind of help do you need?
+      options:
+        - Exercise solution help
+        - Julia syntax question
+        - Concept explanation
+        - Best practices
+        - Performance optimization
+        - General Julia programming
+    validations:
+      required: true
+
+  - type: input
+    id: question-number
+    attributes:
+      label: Question Number (if applicable)
+      description: Which exercise are you working on?
+      placeholder: e.g., Question 025
+
+  - type: textarea
+    id: question-details
+    attributes:
+      label: Your Question
+      description: What specifically would you like help with?
+      placeholder: Describe your question in detail...
+    validations:
+      required: true
+
+  - type: textarea
+    id: attempted-solution
+    attributes:
+      label: What You've Tried
+      description: Please share any code you've attempted or approaches you've considered
+      placeholder: |
+        ```julia
+        # Your attempted code here
+        ```
+      render: julia
+
+  - type: textarea
+    id: expected-outcome
+    attributes:
+      label: Expected Outcome
+      description: What result are you expecting or trying to achieve?
+      placeholder: Describe what you expect to happen...
+
+  - type: textarea
+    id: actual-outcome
+    attributes:
+      label: Actual Outcome
+      description: What actually happens? Include any error messages.
+      placeholder: Describe what actually happens, including any error messages...
+
+  - type: input
+    id: julia-version
+    attributes:
+      label: Julia Version
+      description: What version of Julia are you using?
+      placeholder: e.g., 1.10.9
+
+  - type: dropdown
+    id: experience-level
+    attributes:
+      label: Your Julia Experience Level
+      description: This helps us tailor our response appropriately
+      options:
+        - "Beginner (< 6 months)"
+        - "Intermediate (6 months - 2 years)"
+        - "Advanced (2+ years)"
+        - "Expert (Contributing to Julia ecosystem)"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm you've done the following
+      options:
+        - label: I have read the exercise description carefully
+          required: true
+        - label: I have searched existing issues for similar questions
+          required: true
+        - label: I have tried to solve this myself first
+          required: true

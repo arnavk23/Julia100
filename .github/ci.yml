@@ -1,0 +1,131 @@
+name: Julia CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        julia-version: ['1.10', '1.11', 'nightly']
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        exclude:
+          # Exclude nightly on Windows and macOS to speed up CI
+          - os: windows-latest
+            julia-version: 'nightly'
+          - os: macOS-latest
+            julia-version: 'nightly'
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+        version: ${{ matrix.julia-version }}
+        
+    - name: Cache Julia packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.julia
+        key: ${{ runner.os }}-julia-${{ matrix.julia-version }}-${{ hashFiles('**/Project.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-julia-${{ matrix.julia-version }}-
+          
+    - name: Install dependencies
+      run: |
+        julia --project=. -e 'using Pkg; Pkg.instantiate()'
+        
+    - name: Run validation script
+      run: julia --project=. validate.jl
+      
+    - name: Run exercise tests
+      run: julia --project=. test_exercises.jl
+      
+    - name: Check for syntax errors in main file
+      run: |
+        julia --project=. -e '
+        println("Loading Julia110Exercises.jl...")
+        try
+            include("Julia100Exercises.jl")
+            println("All syntax checks passed!")
+        catch e
+            println("Syntax error found:")
+            println(e)
+            exit(1)
+        end'
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+        version: '1.10'
+        
+    - name: Validate README and documentation
+      run: |
+        # Check that README.md exists and has basic structure
+        if [ ! -f README.md ]; then
+          echo "README.md not found"
+          exit 1
+        fi
+        
+        # Check for basic sections in README
+        if ! grep -q "Julia110Exercises" README.md; then
+          echo "README.md missing project title"
+          exit 1
+        fi
+        
+        if ! grep -q "Installation" README.md; then
+          echo "README.md missing installation instructions"
+          exit 1
+        fi
+        
+        echo "Documentation checks passed!"
+
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+        version: '1.10'
+        
+    - name: Check code formatting and quality
+      run: |
+        julia --project=. -e '
+        # Basic code quality checks
+        println("Running code quality checks...")
+        
+        # Check for common issues
+        content = read("Julia100Exercises.jl", String)
+        
+        # Check for deprecated syntax patterns
+        deprecated_patterns = [
+            "collect(1:n)" => "Use 1:n directly or convert only when needed",
+            "Array{" => "Consider using Vector{} for 1D arrays",
+        ]
+        
+        issues_found = false
+        for (pattern, message) in deprecated_patterns
+            if contains(content, pattern)
+                println("Found potentially outdated pattern: $pattern")
+                println("   Suggestion: $message")
+                issues_found = true
+            end
+        end
+        
+        if !issues_found
+            println("Code quality checks passed!")
+        else
+            println("Some code quality issues found (warnings only)")
+        end'
