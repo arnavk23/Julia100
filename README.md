@@ -43,8 +43,7 @@ println(VERSION);
 ````
 
 ````
-1.8.2
-
+1.10.9
 ````
 
 ## Question 003
@@ -57,34 +56,12 @@ vA = Vector{Float64}(undef, 10)
 ````
 10-element Vector{Float64}:
  0.0
- 1.314224183e-315
- 1.314224183e-315
  0.0
- 1.314248214e-315
- 1.31427351e-315
  0.0
- 1.314248214e-315
- 1.314106556e-315
  0.0
-````
-
-Which is equivalent of
-
-````julia
-vA = Array{Float64, 1}(undef, 10)
-````
-
-````
-10-element Vector{Float64}:
+ ⋮
  0.0
- 1.314248214e-315
- 1.314106556e-315
  0.0
- 1.314248214e-315
- 1.314106556e-315
- 0.0
- 1.314248214e-315
- 1.314106556e-315
  0.0
 ````
 
@@ -106,28 +83,26 @@ Show the documentation of the `+` (Add) method. (★☆☆)
 @doc +
 ````
 
-```
+````
 +(x, y...)
-```
 
-Addition operator. `x+y+z+...` calls this function with all arguments, i.e. `+(x, y, z, ...)`.
+  Addition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).
 
-# Examples
+  Examples
+  ≡≡≡≡≡≡≡≡
 
-```jldoctest
-julia> 1 + 20 + 4
-25
+  julia> 1 + 20 + 4
+  25
+  
+  julia> +(1, 20, 4)
+  25
 
-julia> +(1, 20, 4)
-25
-```
+  dt::Date + t::Time -> DateTime
 
-```
-dt::Date + t::Time -> DateTime
-```
-
-The addition of a `Date` with a `Time` produces a `DateTime`. The hour, minute, second, and millisecond parts of the `Time` are used along with the year, month, and day of the `Date` to create the new `DateTime`. Non-zero microseconds or nanoseconds in the `Time` type will result in an `InexactError` being thrown.
-
+  The addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are
+  used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds
+  in the Time type will result in an InexactError being thrown.
+````
 
 ## Question 006
 Create a vector of zeros of size 10 but the fifth value which is 1. (★☆☆)
@@ -144,9 +119,7 @@ vA
  0.0
  0.0
  0.0
- 1.0
- 0.0
- 0.0
+ ⋮
  0.0
  0.0
  0.0
